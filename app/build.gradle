@@ -17,9 +17,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        androidTest {
+            setRoot('src/test')
+        }
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
+
+    // Networking
+    compile 'com.mcxiaoke.volley:library:1.0.17'
+
+    // Fixme : Find out why we need to import both androidTestCompile and testCompile for testing framework to runTimer
+    testCompile "org.powermock:powermock-api-mockito:1.5.1"
+    androidTestCompile 'org.powermock:powermock-api-mockito:1.5.1'
+    testCompile "org.robolectric:robolectric:3.0"
+    androidTestCompile "org.robolectric:robolectric:3.0"
 }

@@ -3,6 +3,7 @@ package lt.mm.weatherly.adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import lt.mm.weatherly.fragments.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * Controls fragment display for the ViewPager
  */
 public class SimplePagerAdapter extends FragmentPagerAdapter {
-    private final List<Fragment> fragments = new ArrayList<>();
+    private final List<BaseFragment> fragments = new ArrayList<>();
     private final List<String> titles = new ArrayList<>();
 
     public SimplePagerAdapter(FragmentManager manager) {
@@ -21,7 +22,7 @@ public class SimplePagerAdapter extends FragmentPagerAdapter {
 
     //region Public
 
-    public void addFrag(Fragment fragment, String title) {
+    public void addFrag(BaseFragment fragment, String title) {
         fragments.add(fragment);
         titles.add(title);
     }

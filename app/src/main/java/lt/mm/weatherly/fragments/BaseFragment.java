@@ -7,21 +7,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import lt.mm.weatherly.R;
+import lt.mm.weatherly.entities.SearchResult;
 
 /**
  * Created by mariusmerkevicius on 8/22/15.
  * Basic implementation of the fragment
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment<T> extends Fragment {
 
     public BaseFragment() { }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_base, container, false);
-        return view;
+    //region Abstract
+
+    abstract int layout();
+
+    abstract void show(T result);
+
+    abstract void hide();
+
+    //endregion
+
+    //region Logic
+
+    public void update(T object) {
+        if (object == null) {
+            hide();
+            return;
+        }
+        show(object);
     }
 
+    //endregion
 
+    //region Overrides
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(layout(), container, false);
+    }
+
+    //endregion
 
 }

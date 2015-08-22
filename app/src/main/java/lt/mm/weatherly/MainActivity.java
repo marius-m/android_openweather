@@ -2,12 +2,14 @@ package lt.mm.weatherly;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import com.android.volley.toolbox.Volley;
 import lt.mm.weatherly.adapters.SimplePagerAdapter;
 import lt.mm.weatherly.controllers.UserInputController;
+import lt.mm.weatherly.entities.SearchResult;
 import lt.mm.weatherly.fragments.BaseFragment;
 import lt.mm.weatherly.fragments.FragmentNow;
 import lt.mm.weatherly.network.LoadResultListener;
@@ -20,16 +22,21 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private SearchView searchView;
     private SearchNetwork searchNetwork;
+    private SimplePagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
-        viewPager = (ViewPager) findViewById(R.id.tabanim_viewpager);
         searchView = (SearchView) findViewById(R.id.view_search);
         searchView.setInputHandler(searchInputHandler);
 
-        setupViewPager(viewPager);
+        viewPager = (ViewPager) findViewById(R.id.tabanim_viewpager);
+        pagerAdapter = new SimplePagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab1));
+        pagerAdapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab2));
+        pagerAdapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab3));
+        viewPager.setAdapter(pagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabanim_tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -41,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //region Convenience
-
-    private void setupViewPager(ViewPager viewPager) {
-        SimplePagerAdapter adapter = new SimplePagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab1));
-        adapter.addFrag(new BaseFragment(), getString(R.string.fragment_title_tab2));
-        adapter.addFrag(new BaseFragment(), getString(R.string.fragment_title_tab3));
-        viewPager.setAdapter(adapter);
-    }
 
     //endregion
 
@@ -77,15 +76,15 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    LoadResultListener loadResultListener = new LoadResultListener() {
+    LoadResultListener loadResultListener = new LoadResultListener<SearchResult>() {
         @Override
-        public void onLoadSuccess(Object response) {
-            Log.e("asdc", "yay");
+        public void onLoadSuccess(SearchResult response) {
+            ((BaseFragment) pagerAdapter.getItem(viewPager.getCurrentItem())).update(response);
         }
 
         @Override
         public void onLoadFail(String error) {
-            // todo: Needs some kind of handler for error cases. For now we assume everything works as expected
+            ((BaseFragment) pagerAdapter.getItem(viewPager.getCurrentItem())).update(null);
         }
     };
 
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onInputClear() {
-            // Clear everything
+            ((BaseFragment) pagerAdapter.getItem(viewPager.getCurrentItem())).update(null);
         }
     };
 

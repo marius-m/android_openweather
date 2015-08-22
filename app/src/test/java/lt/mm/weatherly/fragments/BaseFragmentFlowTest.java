@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -21,15 +20,15 @@ public class BaseFragmentFlowTest {
     public void setUp() throws Exception {
         fragment = spy(new BaseFragment() {
             @Override
-            int layout() {
+            int getLayoutId() {
                 return 0;
             }
 
             @Override
-            void show(Object result) { }
+            void onShow(Object result) { }
 
             @Override
-            void hide() { }
+            void onHide() { }
         });
 
     }
@@ -37,15 +36,15 @@ public class BaseFragmentFlowTest {
     @Test
     public void testUpdateNull() throws Exception {
         fragment.update(null);
-        verify(fragment, times(1)).hide();
-        verify(fragment, never()).show(any(Object.class));
+        verify(fragment, times(1)).onHide();
+        verify(fragment, never()).onShow(any(Object.class));
     }
 
     @Test
     public void testUpdateValidObject() throws Exception {
         Object objectToShow = mock(Object.class);
         fragment.update(objectToShow);
-        verify(fragment, never()).hide();
-        verify(fragment, times(1)).show(objectToShow);
+        verify(fragment, never()).onHide();
+        verify(fragment, times(1)).onShow(objectToShow);
     }
 }

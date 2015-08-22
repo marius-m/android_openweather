@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     LoadResultListener loadResultListener = new LoadResultListener<SearchResult>() {
         @Override
         public void onLoadSuccess(SearchResult response) {
+            Log.d(Constants.TAG, "SearchResult:"+response);
             ((BaseFragment) pagerAdapter.getItem(viewPager.getCurrentItem())).update(response);
         }
 

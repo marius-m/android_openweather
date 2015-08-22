@@ -5,9 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import lt.mm.weatherly.R;
-import lt.mm.weatherly.entities.SearchResult;
 
 /**
  * Created by mariusmerkevicius on 8/22/15.
@@ -19,11 +16,13 @@ public abstract class BaseFragment<T> extends Fragment {
 
     //region Abstract
 
-    abstract int layout();
+    abstract int getLayoutId();
 
-    abstract void show(T result);
+    abstract void onInflate(View view);
 
-    abstract void hide();
+    abstract void onShow(T result);
+
+    abstract void onHide();
 
     //endregion
 
@@ -31,10 +30,10 @@ public abstract class BaseFragment<T> extends Fragment {
 
     public void update(T object) {
         if (object == null) {
-            hide();
+            onHide();
             return;
         }
-        show(object);
+        onShow(object);
     }
 
     //endregion
@@ -43,7 +42,9 @@ public abstract class BaseFragment<T> extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(layout(), container, false);
+        View view = inflater.inflate(getLayoutId(), container, false);
+        onInflate(view);
+        return view;
     }
 
     //endregion

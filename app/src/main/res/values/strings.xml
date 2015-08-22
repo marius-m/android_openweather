@@ -4,10 +4,13 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!--General-->
+    <string name="fragment_general_empty">Sorry! No data to display!</string>
+
     <!-- Tab titles -->
     <string name="fragment_title_tab1">NOW</string>
     <string name="fragment_title_tab2">HOURLY</string>
-    <string name="fragment_title_tab3">FOREG</string>
+    <string name="fragment_title_tab3">FORECAST</string>
 
     <!--Now tab-->
     <string name="fragment_now_realfeel">Realfeel</string>

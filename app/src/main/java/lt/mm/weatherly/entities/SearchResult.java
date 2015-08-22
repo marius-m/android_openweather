@@ -36,6 +36,35 @@ public class SearchResult {
     @JsonProperty(value = "coord")
     Coord coord;
 
+    //region Getters / Setters
+
+
+    public long getDt() {
+        return dt;
+    }
+
+    public Weather getFirstWeather() {
+        if (weather == null)
+            return null;
+        if (weather.size() > 0)
+            return weather.get(0);
+        return null;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public Wind getWind() {
+        return wind;
+    }
+
+    public Sys getSys() {
+        return sys;
+    }
+
+    //endregion
+
     @Override
     public String toString() {
         return "SearchResult{" +
@@ -55,7 +84,7 @@ public class SearchResult {
 
     //region Classes
 
-    private static class Coord {
+    public static class Coord {
         @JsonProperty(value = "lon")
         double lon;
         @JsonProperty(value = "lat")
@@ -70,7 +99,7 @@ public class SearchResult {
         }
     }
 
-    private static class Weather {
+    public static class Weather {
         @JsonProperty(value = "id")
         int id;
         @JsonProperty(value = "main")
@@ -79,9 +108,17 @@ public class SearchResult {
         String description;
         @JsonProperty(value = "icon")
         String icon;
+
+        public String getIcon() {
+            return icon;
+        }
+
+        public String getMain() {
+            return main;
+        }
     }
 
-    private static class Main {
+    public static class Main {
         @JsonProperty(value = "temp")
         double temp;
         @JsonProperty(value = "pressure")
@@ -92,6 +129,26 @@ public class SearchResult {
         double tempMin;
         @JsonProperty(value = "temp_max")
         double tempMax;
+
+        public double getTemp() {
+            return temp;
+        }
+
+        public double getPressure() {
+            return pressure;
+        }
+
+        public double getHumidity() {
+            return humidity;
+        }
+
+        public double getTempMin() {
+            return tempMin;
+        }
+
+        public double getTempMax() {
+            return tempMax;
+        }
 
         @Override
         public String toString() {
@@ -105,11 +162,15 @@ public class SearchResult {
         }
     }
 
-    private static class Wind {
+    public static class Wind {
         @JsonProperty(value = "speed")
         double speed;
         @JsonProperty(value = "deg")
         int deg;
+
+        public double getSpeed() {
+            return speed;
+        }
 
         @Override
         public String toString() {
@@ -120,7 +181,7 @@ public class SearchResult {
         }
     }
 
-    private static class Clouds {
+    public static class Clouds {
         @JsonProperty(value = "all")
         int all;
 
@@ -132,7 +193,7 @@ public class SearchResult {
         }
     }
 
-    private static class Sys {
+    public static class Sys {
         @JsonProperty(value = "type")
         int type;
         @JsonProperty(value = "id")
@@ -146,6 +207,14 @@ public class SearchResult {
         @JsonProperty(value = "sunset")
         long sunset;
 
+
+        public long getSunrise() {
+            return sunrise;
+        }
+
+        public long getSunset() {
+            return sunset;
+        }
 
         @Override
         public String toString() {

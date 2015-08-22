@@ -39,7 +39,7 @@ public abstract class AbsNetwork<Type> {
         // todo remove hardcodings
         request = new JsonRequest<>(classType,
                 Request.Method.GET,
-                String.format(Constants.BASE_URL, ((TextUtils.isEmpty(suffix)) ? "" : "Kaunas")),
+                String.format(Constants.BASE_URL, ((TextUtils.isEmpty(suffix)) ? "" : suffix)),
                 successListener,
                 errorListener);
         queue.add(request);

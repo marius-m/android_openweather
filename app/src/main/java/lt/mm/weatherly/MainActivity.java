@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import lt.mm.weatherly.adapters.SimplePagerAdapter;
 import lt.mm.weatherly.fragments.BaseFragment;
+import lt.mm.weatherly.fragments.FragmentNow;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         SimplePagerAdapter adapter = new SimplePagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new BaseFragment(), getString(R.string.fragment_title_tab1));
+        adapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab1));
         adapter.addFrag(new BaseFragment(), getString(R.string.fragment_title_tab2));
         adapter.addFrag(new BaseFragment(), getString(R.string.fragment_title_tab3));
         viewPager.setAdapter(adapter);

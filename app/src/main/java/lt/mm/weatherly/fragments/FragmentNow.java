@@ -8,6 +8,7 @@ import lt.mm.weatherly.R;
 
 /**
  * Created by mariusmerkevicius on 8/22/15.
+ * Class that describe how now fragment controller should hook logic with display
  */
 public class FragmentNow extends BaseFragment {
 

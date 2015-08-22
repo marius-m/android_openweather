@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
         viewPager = (ViewPager) findViewById(R.id.tabanim_viewpager);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tabanim_toolbar);
-        setSupportActionBar(toolbar);
         setupViewPager(viewPager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabanim_tabs);

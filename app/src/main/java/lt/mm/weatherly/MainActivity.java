@@ -5,9 +5,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import com.android.volley.toolbox.Volley;
 import lt.mm.weatherly.adapters.SimplePagerAdapter;
+import lt.mm.weatherly.entities.SearchResult;
 import lt.mm.weatherly.fragments.BaseFragment;
 import lt.mm.weatherly.fragments.FragmentNow;
+import lt.mm.weatherly.network.LoadResultListener;
+import lt.mm.weatherly.network.SearchNetwork;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +29,21 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabanim_tabs);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setOnTabSelectedListener(tablSelectionListener);
+
+        SearchNetwork network = new SearchNetwork(Volley.newRequestQueue(this));
+        network.setLoadResultListener(new LoadResultListener() {
+            @Override
+            public void onLoadSuccess(Object response) {
+                Log.e("Asdc", String.valueOf(response));
+            }
+
+            @Override
+            public void onLoadFail(String error) {
+
+            }
+        });
+        network.load();
+
     }
 
     //region Convenience

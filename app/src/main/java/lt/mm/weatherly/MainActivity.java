@@ -2,116 +2,68 @@ package lt.mm.weatherly;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
-import java.util.ArrayList;
-import java.util.List;
+import lt.mm.weatherly.adapters.SimplePagerAdapter;
+import lt.mm.weatherly.fragments.BaseFragment;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private final List<Fragment> mFragmentList = new ArrayList<>();
-    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
-
+        viewPager = (ViewPager) findViewById(R.id.tabanim_viewpager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tabanim_toolbar);
         setSupportActionBar(toolbar);
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.tabanim_viewpager);
         setupViewPager(viewPager);
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabanim_tabs);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                switch (tab.getPosition()) {
-                    case 0:
-                        //showToast("One");
-                        break;
-                    case 1:
-                        //showToast("Two");
-                        break;
-                    case 2:
-                        //showToast("Three");
-                        break;
-                }
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
+        tabLayout.setOnTabSelectedListener(tablSelectionListener);
     }
 
-
+    //region Convenience
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new DummyFragment(getResources().getColor(R.color.accent_material_light)), "CAT");
-        adapter.addFrag(new DummyFragment(getResources().getColor(R.color.ripple_material_light)), "DOG");
-        adapter.addFrag(new DummyFragment(getResources().getColor(R.color.button_material_dark)), "MOUSE");
+        SimplePagerAdapter adapter = new SimplePagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new BaseFragment(), getString(R.string.fragment_title_tab1));
+        adapter.addFrag(new BaseFragment(), getString(R.string.fragment_title_tab2));
+        adapter.addFrag(new BaseFragment(), getString(R.string.fragment_title_tab3));
         viewPager.setAdapter(adapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-        public void addFrag(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
+    //endregion
 
-    public static class DummyFragment extends Fragment {
-        int color;
+    //region Listeners
 
-        public DummyFragment() { }
-
-        public DummyFragment(int color) {
-            this.color = color;
+    TabLayout.OnTabSelectedListener tablSelectionListener = new TabLayout.OnTabSelectedListener() {
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            viewPager.setCurrentItem(tab.getPosition());
+            switch (tab.getPosition()) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.dummy_fragment, container, false);
-
-            final FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.dummyfrag_bg);
-            frameLayout.setBackgroundColor(color);
-
-            return view;
+        public void onTabUnselected(TabLayout.Tab tab) {
         }
-    }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+        }
+    };
+
+    //endregion
 
 }

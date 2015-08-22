@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Tab titles -->
+    <string name="fragment_title_tab1">NOW</string>
+    <string name="fragment_title_tab2">HOURLY</string>
+    <string name="fragment_title_tab3">FOREG</string>
 </resources>

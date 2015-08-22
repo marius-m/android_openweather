@@ -13,7 +13,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <lt.mm.weatherly.views.SearchView
-                android:id="@+id/search_view"
+                android:id="@+id/view_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

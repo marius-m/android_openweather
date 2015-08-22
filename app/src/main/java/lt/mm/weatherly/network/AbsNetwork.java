@@ -1,5 +1,6 @@
 package lt.mm.weatherly.network;
 
+import android.text.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,8 +29,9 @@ public abstract class AbsNetwork<Type> {
 
     /**
      * Initializes load method
+     * @param suffix
      */
-    public void load() {
+    public void load(String suffix) {
         if (isLoading())
             queue.stop();
         if (request != null)
@@ -37,7 +39,7 @@ public abstract class AbsNetwork<Type> {
         // todo remove hardcodings
         request = new JsonRequest<>(classType,
                 Request.Method.GET,
-                String.format(Constants.BASE_URL, "Kaunas"),
+                String.format(Constants.BASE_URL, ((TextUtils.isEmpty(suffix)) ? "" : "Kaunas")),
                 successListener,
                 errorListener);
         queue.add(request);

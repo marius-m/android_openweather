@@ -36,6 +36,23 @@ public class SearchResult {
     @JsonProperty(value = "coord")
     Coord coord;
 
+    @Override
+    public String toString() {
+        return "SearchResult{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cod=" + cod +
+                ", dt=" + dt +
+                ", base='" + base + '\'' +
+                ", sys=" + sys +
+                ", clouds=" + clouds +
+                ", wind=" + wind +
+                ", main=" + main +
+                ", weather=" + weather +
+                ", coord=" + coord +
+                '}';
+    }
+
     //region Classes
 
     private static class Coord {
@@ -43,6 +60,14 @@ public class SearchResult {
         double lon;
         @JsonProperty(value = "lat")
         double lat;
+
+        @Override
+        public String toString() {
+            return "Coord{" +
+                    "lon=" + lon +
+                    ", lat=" + lat +
+                    '}';
+        }
     }
 
     private static class Weather {
@@ -67,6 +92,17 @@ public class SearchResult {
         double tempMin;
         @JsonProperty(value = "temp_max")
         double tempMax;
+
+        @Override
+        public String toString() {
+            return "Main{" +
+                    "temp=" + temp +
+                    ", pressure=" + pressure +
+                    ", humidity=" + humidity +
+                    ", tempMin=" + tempMin +
+                    ", tempMax=" + tempMax +
+                    '}';
+        }
     }
 
     private static class Wind {
@@ -74,11 +110,26 @@ public class SearchResult {
         double speed;
         @JsonProperty(value = "deg")
         int deg;
+
+        @Override
+        public String toString() {
+            return "Wind{" +
+                    "speed=" + speed +
+                    ", deg=" + deg +
+                    '}';
+        }
     }
 
     private static class Clouds {
         @JsonProperty(value = "all")
         int all;
+
+        @Override
+        public String toString() {
+            return "Clouds{" +
+                    "all=" + all +
+                    '}';
+        }
     }
 
     private static class Sys {
@@ -94,6 +145,19 @@ public class SearchResult {
         long sunrise;
         @JsonProperty(value = "sunset")
         long sunset;
+
+
+        @Override
+        public String toString() {
+            return "Sys{" +
+                    "type=" + type +
+                    ", id=" + id +
+                    ", message='" + message + '\'' +
+                    ", country='" + country + '\'' +
+                    ", sunrise=" + sunrise +
+                    ", sunset=" + sunset +
+                    '}';
+        }
     }
 
     //endregion

@@ -2,13 +2,14 @@ package lt.mm.weatherly.views;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.*;
 import lt.mm.weatherly.R;
 import lt.mm.weatherly.controllers.UserInputController;
+import lt.mm.weatherly.network.LoadStateListener;
 
 import java.util.ArrayList;
 
@@ -19,17 +20,14 @@ import java.util.ArrayList;
  * Incomplete implementation! View should not push content down when displaying items in the list view.
  * Needs proper handling for this.
  */
-public class SearchView extends RelativeLayout {
+public class SearchView extends RelativeLayout implements LoadStateListener {
 
     // Controllers
     UserInputController inputController;
 
     // Views
     private ProgressBar viewProgress;
-    private ArrayList<String> searchItems;
-    private ListView viewList;
     private EditText viewInput;
-
 
     public SearchView(Context context) {
         super(context);
@@ -55,25 +53,40 @@ public class SearchView extends RelativeLayout {
     private void init() {
         inflate(getContext(), R.layout.view_search, this);
 
-        inputController = new UserInputController(userInputController);
+        inputController = new UserInputController(null);
 
         // Variables
-        searchItems = new ArrayList<>();
-
         viewInput = (EditText) findViewById(R.id.view_input);
+        viewInput.addTextChangedListener(inputWatcher);
         viewProgress = (ProgressBar) findViewById(R.id.view_progress);
     }
 
+    //region Getters / Setters
+
+    public void setInputHandler(UserInputController.Listener inputHandler) {
+        inputController.setListener(inputHandler);
+    }
+
+    //endregion
+
     //region Listeners
 
-    UserInputController.Listener userInputController = new UserInputController.Listener() {
-        @Override
-        public void onInputChange(String input) {
+    @Override
+    public void onLoadStateChange(boolean loading) {
+        viewProgress.setVisibility( (loading) ? VISIBLE : GONE );
+    }
 
+    TextWatcher inputWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            inputController.handleInput(String.valueOf(charSequence));
         }
 
         @Override
-        public void onInputClear() {
+        public void afterTextChanged(Editable editable) {
 
         }
     };
@@ -82,9 +95,6 @@ public class SearchView extends RelativeLayout {
 
     //region Classes
 
-    public interface Listener {
-        void onRegionChange();
-    }
 
     //endregion
 

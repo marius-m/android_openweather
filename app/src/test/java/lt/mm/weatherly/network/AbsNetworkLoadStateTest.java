@@ -9,8 +9,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
 
-import java.util.Objects;
-
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -38,7 +36,7 @@ public class AbsNetworkLoadStateTest {
     @Test
     public void testStartLoad() throws Exception {
         assertFalse(network.isLoading());
-        network.load();
+        network.load(null);
         verify(listener, times(1)).onLoadStateChange(true);
         assertTrue(network.isLoading());
     }
@@ -53,7 +51,7 @@ public class AbsNetworkLoadStateTest {
                 return null;
             }
         }).when(requestQueue).start();
-        network.load();
+        network.load(null);
         verify(listener, times(2)).onLoadStateChange(any(Boolean.class));
         assertFalse(network.isLoading());
     }
@@ -68,7 +66,7 @@ public class AbsNetworkLoadStateTest {
                 return null;
             }
         }).when(requestQueue).start();
-        network.load();
+        network.load(null);
         verify(listener, times(2)).onLoadStateChange(any(Boolean.class));
         assertFalse(network.isLoading());
     }

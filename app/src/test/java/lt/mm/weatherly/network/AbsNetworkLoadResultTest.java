@@ -35,7 +35,7 @@ public class AbsNetworkLoadResultTest {
 
     @Test
     public void testLoadShouldStartQueue() throws Exception {
-        network.load();
+        network.load(null);
         verify(requestQueue, times(1)).start();
     }
 
@@ -49,7 +49,7 @@ public class AbsNetworkLoadResultTest {
                 return null;
             }
         }).when(requestQueue).start();
-        network.load();
+        network.load(null);
         verify(listener, times(1)).onLoadSuccess(responseObject);
     }
 
@@ -63,7 +63,7 @@ public class AbsNetworkLoadResultTest {
                 return null;
             }
         }).when(requestQueue).start();
-        network.load();
+        network.load(null);
         verify(listener, times(1)).onLoadFail(any(String.class));
     }
 

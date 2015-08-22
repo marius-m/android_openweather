@@ -3,25 +3,21 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+    <ProgressBar
+            android:layout_alignParentRight="true"
+            android:id="@+id/view_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
 
     <EditText
+            android:layout_toLeftOf="@id/view_progress"
             android:id="@+id/view_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
-
-    <ProgressBar
-            android:id="@+id/view_progress"
-            android:layout_below="@id/view_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
-    <!--<ListView-->
-            <!--android:id="@+id/view_list"-->
-            <!--android:layout_below="@id/view_input"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"/>-->
 
 </RelativeLayout>

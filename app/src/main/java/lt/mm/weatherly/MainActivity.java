@@ -11,6 +11,7 @@ import lt.mm.weatherly.adapters.SimplePagerAdapter;
 import lt.mm.weatherly.controllers.UserInputController;
 import lt.mm.weatherly.entities.SearchResult;
 import lt.mm.weatherly.fragments.BaseFragment;
+import lt.mm.weatherly.fragments.FragmentHourly;
 import lt.mm.weatherly.fragments.FragmentNow;
 import lt.mm.weatherly.network.LoadResultListener;
 import lt.mm.weatherly.network.SearchNetwork;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.tabanim_viewpager);
         pagerAdapter = new SimplePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab1));
-        pagerAdapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab2));
+        pagerAdapter.addFrag(new FragmentHourly(), getString(R.string.fragment_title_tab2));
         pagerAdapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab3));
         viewPager.setAdapter(pagerAdapter);
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             viewPager.setCurrentItem(tab.getPosition());
+            Log.e("asdf", "selected");
             switch (tab.getPosition()) {
                 case 0:
                     break;

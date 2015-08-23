@@ -27,6 +27,8 @@ public abstract class AbsNetwork<Type> {
         this.classType = classType;
     }
 
+    abstract String getBaseUrl();
+
     /**
      * Initializes load method
      * @param suffix

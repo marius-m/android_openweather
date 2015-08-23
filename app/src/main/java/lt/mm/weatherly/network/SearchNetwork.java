@@ -12,4 +12,9 @@ public class SearchNetwork extends AbsNetwork<SearchResult> {
     public SearchNetwork(RequestQueue requestQueue) {
         super(requestQueue, SearchResult.class);
     }
+
+    @Override
+    String getBaseUrl() {
+        return null;
+    }
 }

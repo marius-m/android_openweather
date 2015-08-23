@@ -72,11 +72,11 @@ public class FragmentNow extends BaseFragment<SearchResult> {
             textMajorConditionVerbal.setText(result.getFirstWeather().getMain());
         if (result.getMain() != null) {
             // API shortcoming, cant find a way to tell the API, to return in celcius, so makind a conversion.
-            textMajorConditionNumber.setText(String.format("%.0f˚", getCelsiusFromKelvin(result.getMain().getTemp())));
+            textMajorConditionNumber.setText(String.format("%.0f˚", result.getMain().getTemp()));
             textMinorHl.setText(
-                    String.format("%.0f˚ / %.0f˚",
-                            getCelsiusFromKelvin(result.getMain().getTempMax()),
-                            getCelsiusFromKelvin(result.getMain().getTempMin())
+                    String.format("H: %.0f˚ / L: %.0f˚",
+                            result.getMain().getTempMax(),
+                            result.getMain().getTempMin()
                     )
             );
             textMinorHumidity.setText(String.format("%.0f", result.getMain().getHumidity()));
@@ -87,9 +87,9 @@ public class FragmentNow extends BaseFragment<SearchResult> {
         }
     }
 
-    private double getCelsiusFromKelvin(double kelvin) {
-        return kelvin - 273.0;
-    }
+//    private double getCelsiusFromKelvin(double kelvin) {
+//        return kelvin - 273.0;
+//    }
 
     @Override
     void onHide() {

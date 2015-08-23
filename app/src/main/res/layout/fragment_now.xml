@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/dummyfrag_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
@@ -72,6 +71,7 @@
                         android:layout_height="match_parent">
 
                     <TextView
+                            style="@android:style/TextAppearance.DeviceDefault.Large"
                             android:id="@+id/text_major_condition_verbal"
                             android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
@@ -96,6 +96,7 @@
                         android:layout_height="match_parent">
 
                     <TextView
+                            style="@android:style/TextAppearance.DeviceDefault.Large"
                             android:id="@+id/text_major_condition_number"
                             android:layout_centerInParent="true"
                             android:text="26"
@@ -105,7 +106,7 @@
                             />
 
                     <TextView
-                            android:textSize="12sp"
+                            style="@android:style/TextAppearance.DeviceDefault.Small"
                             android:text="H:29/L15"
                             android:id="@+id/text_minor_hl"
                             android:layout_below="@id/text_major_condition_number"
@@ -150,12 +151,14 @@
                             android:layout_height="wrap_content">
 
                         <TextView
+                                style="@android:style/TextAppearance.DeviceDefault.Small"
                                 android:text="@string/fragment_now_humidity"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"/>
 
                         <TextView
+                                style="@android:style/TextAppearance.DeviceDefault.Small"
                                 android:id="@+id/text_minor_humidity"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
@@ -169,12 +172,14 @@
                             android:layout_height="wrap_content">
 
                         <TextView
+                                style="@android:style/TextAppearance.DeviceDefault.Small"
                                 android:text="@string/fragment_now_winds"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"/>
 
                         <TextView
+                                style="@android:style/TextAppearance.DeviceDefault.Small"
                                 android:id="@+id/text_minor_winds"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
@@ -207,12 +212,14 @@
                             android:layout_height="wrap_content">
 
                         <TextView
+                                style="@android:style/TextAppearance.DeviceDefault.Small"
                                 android:text="@string/fragment_now_sunrise"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"/>
 
                         <TextView
+                                style="@android:style/TextAppearance.DeviceDefault.Small"
                                 android:id="@+id/text_minor_sunrise"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
@@ -226,12 +233,14 @@
                             android:layout_height="wrap_content">
 
                         <TextView
+                                style="@android:style/TextAppearance.DeviceDefault.Small"
                                 android:text="@string/fragment_now_sunset"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"/>
 
                         <TextView
+                                style="@android:style/TextAppearance.DeviceDefault.Small"
                                 android:id="@+id/text_minor_sunset"
                                 android:layout_weight="1"
                                 android:layout_width="0dp"

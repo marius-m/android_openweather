@@ -1,11 +1,10 @@
 package lt.mm.weatherly.fragments;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import lt.mm.weatherly.R;
-import lt.mm.weatherly.entities.SearchResult;
+import lt.mm.weatherly.entities.CityCondition;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +14,7 @@ import java.util.TimeZone;
  * Created by mariusmerkevicius on 8/22/15.
  * Class that describe how now fragment controller should hook logic with display
  */
-public class FragmentNow extends BaseFragment<SearchResult> {
+public class FragmentNow extends BaseFragment<CityCondition> {
 
     // Views
     private View mainContainer;
@@ -64,7 +63,7 @@ public class FragmentNow extends BaseFragment<SearchResult> {
     }
 
     @Override
-    void onShow(SearchResult result) {
+    void onShow(CityCondition result) {
         mainContainer.setVisibility(View.VISIBLE);
         emptyContainer.setVisibility(View.GONE);
 

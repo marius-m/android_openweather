@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import lt.mm.weatherly.R;
 import lt.mm.weatherly.adapters.RecyclerAdapter;
-import lt.mm.weatherly.entities.SearchResult;
 
 /**
  * Created by mariusmerkevicius on 8/22/15.

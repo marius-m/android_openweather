@@ -6,6 +6,7 @@ import lt.mm.weatherly.network.binders.NetworkBinderNow;
 
 /**
  * Created by mariusmerkevicius on 8/23/15.
+ * Class that returns binder configuration for {@link WeatherNetwork} class.
  */
 public class BinderFactory {
 

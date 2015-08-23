@@ -6,6 +6,7 @@ import lt.mm.weatherly.network.AbsNetwork;
 
 /**
  * Created by mariusmerkevicius on 8/23/15.
+ * Binder configuration that represents the formed url and its class reflection for the response
  */
 public class NetworkBinderForecast implements AbsNetwork.Binder {
     

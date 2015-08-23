@@ -8,19 +8,7 @@ import java.util.ArrayList;
  * Created by mariusmerkevicius on 8/22/15.
  * A data holder for search result
  */
-public class SearchResult {
-
-    // Main
-    @JsonProperty(value = "id")
-    int id;
-    @JsonProperty(value = "name")
-    String name;
-    @JsonProperty(value = "cod")
-    int cod;
-    @JsonProperty(value = "dt")
-    long dt;
-    @JsonProperty(value = "base")
-    String base;
+public class Condition {
 
     // Other
     @JsonProperty(value = "sys")
@@ -37,11 +25,6 @@ public class SearchResult {
     Coord coord;
 
     //region Getters / Setters
-
-
-    public long getDt() {
-        return dt;
-    }
 
     public Weather getFirstWeather() {
         if (weather == null)
@@ -67,12 +50,7 @@ public class SearchResult {
 
     @Override
     public String toString() {
-        return "SearchResult{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", cod=" + cod +
-                ", dt=" + dt +
-                ", base='" + base + '\'' +
+        return "Condition{" +
                 ", sys=" + sys +
                 ", clouds=" + clouds +
                 ", wind=" + wind +

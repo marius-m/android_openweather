@@ -8,7 +8,6 @@ import android.util.Log;
 import com.android.volley.toolbox.Volley;
 import lt.mm.weatherly.adapters.SimplePagerAdapter;
 import lt.mm.weatherly.controllers.UserInputController;
-import lt.mm.weatherly.entities.SearchResult;
 import lt.mm.weatherly.fragments.BaseFragment;
 import lt.mm.weatherly.fragments.FragmentHourly;
 import lt.mm.weatherly.fragments.FragmentNow;
@@ -44,12 +43,11 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setOnTabSelectedListener(tabSelectionListener);
 
+        binderFactory = new BinderFactory();
         weatherNetwork = new WeatherNetwork(Volley.newRequestQueue(this));
         weatherNetwork.setLoadStateListener(searchView);
         weatherNetwork.setLoadResultListener(loadResultListener);
-
-        // Binder configurations
-        binderFactory = new BinderFactory();
+        weatherNetwork.setBinder(binderFactory.now());
     }
 
     //region Convenience
@@ -65,21 +63,21 @@ public class MainActivity extends AppCompatActivity {
             switch (tab.getPosition()) {
                 case 0:
                     weatherNetwork.setBinder(binderFactory.now());
-                    searchView.notifyInputChange();
                     break;
                 case 1:
                     weatherNetwork.setBinder(binderFactory.hourly());
-                    searchView.notifyInputChange();
                     break;
                 case 2:
                     weatherNetwork.setBinder(binderFactory.forecast());
-                    searchView.notifyInputChange();
                     break;
             }
+            searchView.notifyInputChange();
         }
 
         @Override
-        public void onTabUnselected(TabLayout.Tab tab) { }
+        public void onTabUnselected(TabLayout.Tab tab) {
+            ((BaseFragment) pagerAdapter.getItem(viewPager.getCurrentItem())).update(null);
+        }
 
         @Override
         public void onTabReselected(TabLayout.Tab tab) { }

@@ -19,7 +19,12 @@ public class BaseFragmentFlowTest {
 
     @Before
     public void setUp() throws Exception {
-        fragment = spy(new BaseFragment() {
+        fragment = spy(new BaseFragment<Object>() {
+            @Override
+            Class getClassType() {
+                return Object.class;
+            }
+
             @Override
             int getLayoutId() {
                 return 0;
@@ -46,7 +51,7 @@ public class BaseFragmentFlowTest {
 
     @Test
     public void testUpdateValidObject() throws Exception {
-        Object objectToShow = mock(Object.class);
+        Object objectToShow = new Object();
         fragment.update(objectToShow);
         verify(fragment, never()).onHide();
         verify(fragment, times(1)).onShow(objectToShow);

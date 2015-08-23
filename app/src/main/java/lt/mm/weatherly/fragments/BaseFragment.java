@@ -37,8 +37,7 @@ public abstract class BaseFragment<T> extends Fragment {
         }
 
         if (object.getClass() == getClassType())
-
-        onShow(object);
+            onShow(object);
     }
 
     //endregion

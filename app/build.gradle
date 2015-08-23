@@ -45,6 +45,10 @@ dependencies {
     // Json to object handling
     compile 'com.fasterxml:jackson-module-json-org:0.9.1'
 
+    // Espresso
+//    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+//    androidTestCompile 'com.android.support.test:runner:0.3'
+
     // Fixme : Find out why we need to import both androidTestCompile and testCompile for testing framework to runTimer
     testCompile "org.powermock:powermock-api-mockito:1.5.1"
     androidTestCompile 'org.powermock:powermock-api-mockito:1.5.1'

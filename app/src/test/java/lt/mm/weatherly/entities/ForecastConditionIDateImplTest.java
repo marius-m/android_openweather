@@ -24,24 +24,24 @@ public class ForecastConditionIDateImplTest {
     @Test
     public void testProperTitle() throws Exception {
         ForecastCondition condition = new ForecastCondition();
-        condition.dt = 1440321725;
+        condition.dt = 1440321725 * 1000;
         assertNotNull(condition.getTitle());
-        assertEquals("Sunday", condition.getTitle());
+        assertEquals("Thursday", condition.getTitle());
     }
 
     @Test
     public void testProperTitle1() throws Exception {
         ForecastCondition condition = new ForecastCondition();
-        condition.dt = 1440321725;
+        condition.dt = 1440321725 * 1000;
         condition.dt += 1000 * 60 * 60 * 24;
         assertNotNull(condition.getTitle());
-        assertEquals("Monday", condition.getTitle());
+        assertEquals("Wednesday", condition.getTitle());
     }
 
     @Test
     public void testProperTitle2() throws Exception {
         ForecastCondition condition = new ForecastCondition();
-        condition.dt = 1440321725;
+        condition.dt = 1440321725 * 1000;
         condition.dt += 2 * (1000 * 60 * 60 * 24);
         assertNotNull(condition.getTitle());
         assertEquals("Tuesday", condition.getTitle());

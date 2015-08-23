@@ -21,10 +21,18 @@ public class HourlyConditionIDataImplTest {
     }
 
     @Test
-    public void testProperTitle() throws Exception {
+    public void testMalformedTitle() throws Exception {
         HourlyCondition condition = new HourlyCondition();
         condition.dtText = "asdf";
+        assertNull(condition.getTitle());
+    }
+
+    @Test
+    public void testProperTitle() throws Exception {
+        HourlyCondition condition = new HourlyCondition();
+        condition.dtText = "1969-12-31 16:00:00";
         assertNotNull(condition.getTitle());
+        assertEquals("16:00", condition.getTitle());
     }
 
     @Test

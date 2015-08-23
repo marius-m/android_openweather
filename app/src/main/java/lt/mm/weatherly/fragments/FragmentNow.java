@@ -39,6 +39,11 @@ public class FragmentNow extends BaseFragment<CityCondition> {
     }
 
     @Override
+    Class getClassType() {
+        return CityCondition.class;
+    }
+
+    @Override
     int getLayoutId() {
         return R.layout.fragment_now;
     }
@@ -81,8 +86,8 @@ public class FragmentNow extends BaseFragment<CityCondition> {
             textMinorHumidity.setText(String.format("%.0f", result.getMain().getHumidity()));
             textMinorWinds.setText(String.format("%.2f m/s", result.getWind().getSpeed()));
             // fixme : probably not a proper way to calculate sunrise/sunset - need to read documentation
-            textMinorSunrise.setText(simpleDateFormat.format(new Date(System.currentTimeMillis() + result.getSys().getSunrise())));
-            textMinorSunset.setText(simpleDateFormat.format(new Date(System.currentTimeMillis() + result.getSys().getSunset())));
+            textMinorSunrise.setText(simpleDateFormat.format(new Date(result.getSys().getSunrise())));
+            textMinorSunset.setText(simpleDateFormat.format(new Date(result.getSys().getSunset())));
         }
     }
 

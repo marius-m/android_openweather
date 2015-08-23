@@ -186,11 +186,11 @@ public class Condition {
 
 
         public long getSunrise() {
-            return sunrise;
+            return sunrise * 1000;
         }
 
         public long getSunset() {
-            return sunset;
+            return sunset * 1000;
         }
 
         @Override

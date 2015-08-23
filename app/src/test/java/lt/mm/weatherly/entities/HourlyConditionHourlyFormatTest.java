@@ -11,18 +11,18 @@ import static org.junit.Assert.*;
  * Created by mariusmerkevicius on 8/23/15.
  */
 @RunWith(RobolectricTestRunner.class)
-public class ExConditionHourlyFormatTest {
+public class HourlyConditionHourlyFormatTest {
 
-    private ExCondition condition;
+    private HourlyCondition condition;
 
     @Before
     public void setUp() throws Exception {
-        condition = new ExCondition();
+        condition = new HourlyCondition();
     }
 
     @Test
     public void testInputNull() throws Exception {
-        condition = new ExCondition();
+        condition = new HourlyCondition();
         assertNull(condition.convertDateToTitle(null));
     }
 

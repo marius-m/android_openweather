@@ -8,6 +8,7 @@ import com.android.volley.toolbox.Volley;
 import lt.mm.weatherly.adapters.SimplePagerAdapter;
 import lt.mm.weatherly.controllers.UserInputController;
 import lt.mm.weatherly.fragments.BaseFragment;
+import lt.mm.weatherly.fragments.FragmentForecast;
 import lt.mm.weatherly.fragments.FragmentHourly;
 import lt.mm.weatherly.fragments.FragmentNow;
 import lt.mm.weatherly.network.BinderFactory;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new SimplePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab1));
         pagerAdapter.addFrag(new FragmentHourly(), getString(R.string.fragment_title_tab2));
-        pagerAdapter.addFrag(new FragmentNow(), getString(R.string.fragment_title_tab3));
+        pagerAdapter.addFrag(new FragmentForecast(), getString(R.string.fragment_title_tab3));
         viewPager.setAdapter(pagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabanim_tabs);

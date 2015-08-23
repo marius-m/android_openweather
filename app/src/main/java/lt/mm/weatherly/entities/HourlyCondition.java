@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by mariusmerkevicius on 8/22/15.
  */
-public class ExCondition extends Condition implements RecyclerAdapter.IData {
+public class HourlyCondition extends Condition implements RecyclerAdapter.IData {
 
     private final SimpleDateFormat inputFormat;
     private final SimpleDateFormat outputFormat;
@@ -21,7 +21,7 @@ public class ExCondition extends Condition implements RecyclerAdapter.IData {
     @JsonProperty(value = "dt_txt")
     String dtText;
 
-    public ExCondition() {
+    public HourlyCondition() {
         inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         outputFormat = new SimpleDateFormat("HH:mm");
     }

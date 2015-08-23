@@ -16,6 +16,8 @@ public abstract class BaseFragment<T> extends Fragment {
 
     //region Abstract
 
+    abstract Class getClassType();
+
     abstract int getLayoutId();
 
     abstract void onInflate(View view);
@@ -33,6 +35,9 @@ public abstract class BaseFragment<T> extends Fragment {
             onHide();
             return;
         }
+
+        if (object.getClass() == getClassType())
+
         onShow(object);
     }
 

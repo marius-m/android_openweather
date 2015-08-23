@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by mariusmerkevicius on 8/23/15.
  */
-public class Forecast {
+public class Hourly {
 
     // Main
     @JsonProperty(value = "id")
@@ -18,16 +18,16 @@ public class Forecast {
     String message;
 
     @JsonProperty(value = "list")
-    ArrayList<ForecastCondition> list;
+    ArrayList<HourlyCondition> list;
+
 
     //region Getters / Setters
 
-    public ArrayList<ForecastCondition> getList() {
+    public ArrayList<HourlyCondition> getList() {
         return list;
     }
 
     //endregion
-
 
     @Override
     public String toString() {
@@ -35,7 +35,6 @@ public class Forecast {
                 "id=" + id +
                 ", cod=" + cod +
                 ", message='" + message + '\'' +
-                ", list=" + list +
                 '}';
     }
 }

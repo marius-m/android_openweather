@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 /**
  * Created by mariusmerkevicius on 8/22/15.
- * A data holder for search result
  */
 public class Condition {
 

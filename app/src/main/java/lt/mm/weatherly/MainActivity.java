@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import com.android.volley.toolbox.Volley;
 import lt.mm.weatherly.adapters.SimplePagerAdapter;
 import lt.mm.weatherly.controllers.UserInputController;
@@ -14,6 +13,7 @@ import lt.mm.weatherly.fragments.FragmentNow;
 import lt.mm.weatherly.network.BinderFactory;
 import lt.mm.weatherly.network.LoadResultListener;
 import lt.mm.weatherly.network.WeatherNetwork;
+import lt.mm.weatherly.utils.Log;
 import lt.mm.weatherly.views.SearchView;
 
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     LoadResultListener loadResultListener = new LoadResultListener() {
         @Override
         public void onLoadSuccess(Object response) {
-            Log.d(Constants.TAG, "SearchResult:"+response);
+            Log.debugError("Result:" + response);
             ((BaseFragment) pagerAdapter.getItem(viewPager.getCurrentItem())).update(response);
         }
 

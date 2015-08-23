@@ -2,18 +2,21 @@ package lt.mm.weatherly.fragments;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import lt.mm.weatherly.utils.Log;
 import android.view.View;
 import lt.mm.weatherly.R;
 import lt.mm.weatherly.adapters.RecyclerAdapter;
+import lt.mm.weatherly.entities.Forecast;
 
 /**
  * Created by mariusmerkevicius on 8/22/15.
  * Class that describe how now fragment controller should hook logic with display
  */
-public class FragmentHourly extends BaseFragment {
+public class FragmentHourly extends BaseFragment<Forecast> {
 
-    public FragmentHourly() {
-    }
+    private RecyclerAdapter adapter;
+
+    public FragmentHourly() { }
 
     @Override
     int getLayoutId() {
@@ -26,12 +29,13 @@ public class FragmentHourly extends BaseFragment {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new RecyclerAdapter(new String[]{"First", "Second", "Third"}));
+        adapter = new RecyclerAdapter();
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
-    void onShow(Object result) {
-
+    void onShow(Forecast result) {
+        adapter.setData(result.getList());
     }
 
     @Override

@@ -27,15 +27,16 @@ public class AbsNetworkLoadResultTest {
     public void setUp() throws Exception {
         listener = mock(LoadResultListener.class);
         requestQueue = mock(RequestQueue.class);
-        network = new AbsNetwork(requestQueue, String.class) {
+        network = new AbsNetwork(requestQueue) {
             // No abstract methods to implement
         };
+        network.setBinder(mock(AbsNetwork.Binder.class));
         network.setLoadResultListener(listener);
     }
 
     @Test
     public void testLoadShouldStartQueue() throws Exception {
-        network.load(null);
+        network.load();
         verify(requestQueue, times(1)).start();
     }
 
@@ -49,7 +50,7 @@ public class AbsNetworkLoadResultTest {
                 return null;
             }
         }).when(requestQueue).start();
-        network.load(null);
+        network.load();
         verify(listener, times(1)).onLoadSuccess(responseObject);
     }
 
@@ -63,7 +64,7 @@ public class AbsNetworkLoadResultTest {
                 return null;
             }
         }).when(requestQueue).start();
-        network.load(null);
+        network.load();
         verify(listener, times(1)).onLoadFail(any(String.class));
     }
 

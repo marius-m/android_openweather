@@ -1,5 +1,6 @@
 package lt.mm.weatherly.fragments;
 
+import android.view.View;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,9 @@ public class BaseFragmentFlowTest {
             int getLayoutId() {
                 return 0;
             }
+
+            @Override
+            void onInflate(View view) { }
 
             @Override
             void onShow(Object result) { }

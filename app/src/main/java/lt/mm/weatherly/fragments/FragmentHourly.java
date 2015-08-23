@@ -11,7 +11,7 @@ import lt.mm.weatherly.entities.SearchResult;
  * Created by mariusmerkevicius on 8/22/15.
  * Class that describe how now fragment controller should hook logic with display
  */
-public class FragmentHourly extends BaseFragment<SearchResult> {
+public class FragmentHourly extends BaseFragment {
 
     public FragmentHourly() {
     }
@@ -31,7 +31,7 @@ public class FragmentHourly extends BaseFragment<SearchResult> {
     }
 
     @Override
-    void onShow(SearchResult result) {
+    void onShow(Object result) {
 
     }
 

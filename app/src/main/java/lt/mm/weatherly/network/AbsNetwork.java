@@ -5,43 +5,40 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import lt.mm.weatherly.Constants;
 
 /**
  * Created by mariusmerkevicius on 7/26/15.
  * Wrapper class that is responsible for handling networking functions
  */
-public abstract class AbsNetwork<Type> {
+public abstract class AbsNetwork {
     protected RequestQueue queue;
-    protected Class classType;
-    protected JsonRequest<Type> request;
+    protected JsonRequest request;
 
+    Binder binder;
     LoadResultListener loadResultListener;
     LoadStateListener loadStateListener;
     boolean loading = false;
 
-    public AbsNetwork(RequestQueue requestQueue, Class classType) {
+    public AbsNetwork(RequestQueue requestQueue) {
         if (requestQueue == null)
             throw new IllegalArgumentException("Cant function without RequestQueue!");
         this.queue = requestQueue;
-        this.classType = classType;
     }
-
-    abstract String getBaseUrl();
 
     /**
      * Initializes load method
-     * @param suffix
+     * @param args
      */
-    public void load(String suffix) {
+    public void load(String... args) {
+        if (binder == null)
+            return;
         if (isLoading())
             queue.stop();
         if (request != null)
             queue.cancelAll(request);
-        // todo remove hardcodings
-        request = new JsonRequest<>(classType,
+        request = new JsonRequest<>(binder.getClassType(),
                 Request.Method.GET,
-                String.format(Constants.BASE_URL, ((TextUtils.isEmpty(suffix)) ? "" : suffix)),
+                binder.formUrl(args),
                 successListener,
                 errorListener);
         queue.add(request);
@@ -75,13 +72,17 @@ public abstract class AbsNetwork<Type> {
         this.loadResultListener = loadResultListener;
     }
 
+    public void setBinder(Binder binder) {
+        this.binder = binder;
+    }
+
     //endregion
 
     //region Listeners
 
-    Response.Listener<Type> successListener = new Response.Listener<Type>() {
+    Response.Listener successListener = new Response.Listener() {
         @Override
-        public void onResponse(Type response) {
+        public void onResponse(Object response) {
             if (request == null)
                 return;
             if (loadResultListener != null)
@@ -99,6 +100,15 @@ public abstract class AbsNetwork<Type> {
             setLoading(false);
         }
     };
+
+    //endregion
+
+    //region Classes
+
+    public interface Binder<T> {
+        Class getClassType();
+        String formUrl(String... args);
+    }
 
     //endregion
 

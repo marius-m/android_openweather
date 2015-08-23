@@ -2,7 +2,6 @@ package lt.mm.weatherly;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,8 +12,9 @@ import lt.mm.weatherly.entities.SearchResult;
 import lt.mm.weatherly.fragments.BaseFragment;
 import lt.mm.weatherly.fragments.FragmentHourly;
 import lt.mm.weatherly.fragments.FragmentNow;
+import lt.mm.weatherly.network.BinderFactory;
 import lt.mm.weatherly.network.LoadResultListener;
-import lt.mm.weatherly.network.SearchNetwork;
+import lt.mm.weatherly.network.WeatherNetwork;
 import lt.mm.weatherly.views.SearchView;
 
 
@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SearchView searchView;
-    private SearchNetwork searchNetwork;
+    private WeatherNetwork weatherNetwork;
     private SimplePagerAdapter pagerAdapter;
+    private BinderFactory binderFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +44,12 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setOnTabSelectedListener(tabSelectionListener);
 
-        searchNetwork = new SearchNetwork(Volley.newRequestQueue(this));
-        searchNetwork.setLoadStateListener(searchView);
-        searchNetwork.setLoadResultListener(loadResultListener);
+        weatherNetwork = new WeatherNetwork(Volley.newRequestQueue(this));
+        weatherNetwork.setLoadStateListener(searchView);
+        weatherNetwork.setLoadResultListener(loadResultListener);
+
+        // Binder configurations
+        binderFactory = new BinderFactory();
     }
 
     //region Convenience
@@ -58,29 +62,32 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
             viewPager.setCurrentItem(tab.getPosition());
-            Log.e("asdf", "selected");
             switch (tab.getPosition()) {
                 case 0:
+                    weatherNetwork.setBinder(binderFactory.now());
+                    searchView.notifyInputChange();
                     break;
                 case 1:
+                    weatherNetwork.setBinder(binderFactory.hourly());
+                    searchView.notifyInputChange();
                     break;
                 case 2:
+                    weatherNetwork.setBinder(binderFactory.forecast());
+                    searchView.notifyInputChange();
                     break;
             }
         }
 
         @Override
-        public void onTabUnselected(TabLayout.Tab tab) {
-        }
+        public void onTabUnselected(TabLayout.Tab tab) { }
 
         @Override
-        public void onTabReselected(TabLayout.Tab tab) {
-        }
+        public void onTabReselected(TabLayout.Tab tab) { }
     };
 
-    LoadResultListener loadResultListener = new LoadResultListener<SearchResult>() {
+    LoadResultListener loadResultListener = new LoadResultListener() {
         @Override
-        public void onLoadSuccess(SearchResult response) {
+        public void onLoadSuccess(Object response) {
             Log.d(Constants.TAG, "SearchResult:"+response);
             ((BaseFragment) pagerAdapter.getItem(viewPager.getCurrentItem())).update(response);
         }
@@ -94,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     UserInputController.Listener searchInputHandler = new UserInputController.Listener() {
         @Override
         public void onInputChange(String input) {
-            searchNetwork.load(input);
+            weatherNetwork.load(input);
         }
 
         @Override

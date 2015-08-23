@@ -26,9 +26,10 @@ public class AbsNetworkLoadStateTest {
     public void setUp() throws Exception {
         listener = mock(LoadStateListener.class);
         requestQueue = mock(RequestQueue.class);
-        network = new AbsNetwork(requestQueue, String.class) {
+        network = new AbsNetwork(requestQueue) {
             // No abstract methods to implement
         };
+        network.setBinder(mock(AbsNetwork.Binder.class));
         network.setLoadStateListener(listener);
     }
 
@@ -36,7 +37,7 @@ public class AbsNetworkLoadStateTest {
     @Test
     public void testStartLoad() throws Exception {
         assertFalse(network.isLoading());
-        network.load(null);
+        network.load();
         verify(listener, times(1)).onLoadStateChange(true);
         assertTrue(network.isLoading());
     }
@@ -51,7 +52,7 @@ public class AbsNetworkLoadStateTest {
                 return null;
             }
         }).when(requestQueue).start();
-        network.load(null);
+        network.load();
         verify(listener, times(2)).onLoadStateChange(any(Boolean.class));
         assertFalse(network.isLoading());
     }
@@ -66,7 +67,7 @@ public class AbsNetworkLoadStateTest {
                 return null;
             }
         }).when(requestQueue).start();
-        network.load(null);
+        network.load();
         verify(listener, times(2)).onLoadStateChange(any(Boolean.class));
         assertFalse(network.isLoading());
     }

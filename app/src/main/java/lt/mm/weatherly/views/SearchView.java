@@ -61,6 +61,13 @@ public class SearchView extends RelativeLayout implements LoadStateListener {
         viewProgress = (ProgressBar) findViewById(R.id.view_progress);
     }
 
+    /**
+     * Re-queries input from the window, and invokes input handler class to filter.
+     */
+    public void notifyInputChange() {
+        inputController.handleInput(String.valueOf(viewInput.getText()));
+    }
+
     //region Getters / Setters
 
     public void setInputHandler(UserInputController.Listener inputHandler) {
